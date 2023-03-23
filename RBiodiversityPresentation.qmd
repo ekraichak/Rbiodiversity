@@ -1,0 +1,182 @@
+---
+title: "R for Biodiversity Science"
+execute:
+  echo: true
+format: revealjs
+---
+
+# data management
+
+## Read in data in one line
+```{r, message=FALSE}
+library(tidyverse)
+soy <- read_csv("soybean.csv")
+soy
+```
+
+## Filter
+```{r}
+soy %>% 
+  filter(gen == "G01")
+```
+
+## Sort
+```{r}
+soy %>% 
+  arrange(yield)
+```
+
+## Select
+```{r}
+soy %>% 
+  select(gen, yield)
+```
+
+## Advanced Select
+```{r}
+soy %>% 
+  select(where(is.numeric))
+```
+
+## Summarizing data
+```{r}
+soy %>% 
+  group_by(loc) %>% 
+  summarize(mean_yield = mean(yield))
+```
+
+# data visualization
+
+## basic plotting
+```{r}
+soy %>% 
+  ggplot(aes(x = oil, y = protein)) +
+  geom_point()
+```
+
+## customize your plot
+```{r}
+soy %>% 
+  ggplot(aes(x = oil, y = protein, color = loc)) +
+  geom_point(alpha = 0.5)
+```
+
+## customize even furthur
+```{r}
+my_graph <- soy %>% 
+  ggplot(aes(x = oil, y = protein, color = loc)) +
+  geom_point(alpha = 0.5, size = 3) +
+  scale_color_brewer(palette = "Set2") +
+  theme_classic(base_size = 15) 
+
+my_graph
+```
+
+## Create complex graphs
+
+```{r}
+my_graph +
+  facet_grid(year ~ loc) +
+  geom_smooth(color = "blue")
+```
+
+## 3D mapping
+```{r}
+library(plotly)
+
+plot_ly(soy, x = ~protein, y = ~oil, z = ~height, color = ~ factor(year)) %>% 
+  add_markers()
+```
+
+# Statistics
+
+## comparing groups visually
+```{r}
+library(ggpubr)
+
+ggbarplot(soy, x = "loc", y = "oil", add = "mean_sd", fill = "loc")
+```
+
+## statistical test with ANOVA
+```{r}
+loc_anova <- aov(oil ~ loc, data = soy)
+summary(loc_anova)
+```
+
+## post-comparison
+```{r}
+library(agricolae)
+loc_hsd <- HSD.test(loc_anova, trt = "loc")
+loc_hsd
+```
+
+## plot the posthoc results
+
+```{r}
+plot(loc_hsd)
+```
+
+
+# map making
+
+## Download boundary data from online and plot
+
+```{r}
+thailand <- map_data("world", "thailand")
+ggplot(thailand, aes(long, lat, group = group)) +
+  geom_polygon(fill = "brown") +
+  coord_quickmap()
+```
+
+## plot distribution of our plant
+
+```{r}
+maerua <- read_csv("maerua_coord.csv")
+ggplot() +
+  geom_polygon(aes(long, lat, group = group), fill = "#B0C59D", data = thailand) +
+  geom_point(aes(lon, lat), color = "red", data = maerua) +
+  coord_quickmap()
+```
+
+# diversity / community analysis
+
+## work with community data
+```{r, echo=FALSE}
+library(vegan)
+data(dune)
+data(dune.env)
+```
+
+```{r}
+dune
+```
+
+## visualize community data
+```{r}
+heatmap(as.matrix(dune))
+```
+
+## have we got all the species yet?
+```{r}
+plot(specaccum(dune))
+```
+
+## calculate diversity of each plot
+
+Species Number
+```{r}
+specnumber(dune)
+```
+
+Shannon's Index
+```{r}
+diversity(dune, index = "shannon")
+```
+
+## community analysis with PCA
+```{r}
+library(ggfortify)
+dune_pca <- prcomp(dune)
+autoplot(dune_pca, colour = "Management", data = dune.env, frame = TRUE)
+```
+
