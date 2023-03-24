@@ -3,11 +3,14 @@ title: "R for Biodiversity Science"
 execute:
   echo: true
 format: revealjs
+editor_options: 
+  chunk_output_type: inline
 ---
 
 # data management
 
 ## Read in data in one line
+
 ```{r, message=FALSE}
 library(tidyverse)
 soy <- read_csv("soybean.csv")
@@ -15,39 +18,46 @@ soy
 ```
 
 ## Filter
+
 ```{r}
 soy %>% 
-  filter(gen == "G01")
+  filter(gen == c("G01", "G02"))
 ```
 
 ## Sort
+
 ```{r}
 soy %>% 
   arrange(yield)
 ```
 
 ## Select
+
 ```{r}
 soy %>% 
   select(gen, yield)
 ```
 
 ## Advanced Select
+
 ```{r}
 soy %>% 
   select(where(is.numeric))
 ```
 
 ## Summarizing data
+
 ```{r}
 soy %>% 
-  group_by(loc) %>% 
-  summarize(mean_yield = mean(yield))
+  group_by(loc, year) %>% 
+  summarize(mean_yield = mean(yield), 
+            sd_yield = sd(yield))
 ```
 
 # data visualization
 
 ## basic plotting
+
 ```{r}
 soy %>% 
   ggplot(aes(x = oil, y = protein)) +
@@ -55,6 +65,7 @@ soy %>%
 ```
 
 ## customize your plot
+
 ```{r}
 soy %>% 
   ggplot(aes(x = oil, y = protein, color = loc)) +
@@ -62,12 +73,13 @@ soy %>%
 ```
 
 ## customize even furthur
+
 ```{r}
 my_graph <- soy %>% 
   ggplot(aes(x = oil, y = protein, color = loc)) +
   geom_point(alpha = 0.5, size = 3) +
-  scale_color_brewer(palette = "Set2") +
-  theme_classic(base_size = 15) 
+  scale_color_brewer(palette = "Set1") +
+  theme_bw(base_size = 15, base_family = "serif") 
 
 my_graph
 ```
@@ -81,6 +93,7 @@ my_graph +
 ```
 
 ## 3D mapping
+
 ```{r}
 library(plotly)
 
@@ -91,6 +104,7 @@ plot_ly(soy, x = ~protein, y = ~oil, z = ~height, color = ~ factor(year)) %>%
 # Statistics
 
 ## comparing groups visually
+
 ```{r}
 library(ggpubr)
 
@@ -98,12 +112,14 @@ ggbarplot(soy, x = "loc", y = "oil", add = "mean_sd", fill = "loc")
 ```
 
 ## statistical test with ANOVA
+
 ```{r}
 loc_anova <- aov(oil ~ loc, data = soy)
 summary(loc_anova)
 ```
 
 ## post-comparison
+
 ```{r}
 library(agricolae)
 loc_hsd <- HSD.test(loc_anova, trt = "loc")
@@ -115,7 +131,6 @@ loc_hsd
 ```{r}
 plot(loc_hsd)
 ```
-
 
 # map making
 
@@ -141,6 +156,7 @@ ggplot() +
 # diversity / community analysis
 
 ## work with community data
+
 ```{r, echo=FALSE}
 library(vegan)
 data(dune)
@@ -152,11 +168,13 @@ dune
 ```
 
 ## visualize community data
+
 ```{r}
 heatmap(as.matrix(dune))
 ```
 
 ## have we got all the species yet?
+
 ```{r}
 plot(specaccum(dune))
 ```
@@ -164,19 +182,21 @@ plot(specaccum(dune))
 ## calculate diversity of each plot
 
 Species Number
+
 ```{r}
 specnumber(dune)
 ```
 
 Shannon's Index
+
 ```{r}
 diversity(dune, index = "shannon")
 ```
 
 ## community analysis with PCA
+
 ```{r}
 library(ggfortify)
 dune_pca <- prcomp(dune)
 autoplot(dune_pca, colour = "Management", data = dune.env, frame = TRUE)
 ```
-
