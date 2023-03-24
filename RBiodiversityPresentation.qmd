@@ -2,9 +2,7 @@
 title: "R for Biodiversity Science"
 execute:
   echo: true
-format: revealjs
-editor_options: 
-  chunk_output_type: inline
+format: html
 ---
 
 # data management

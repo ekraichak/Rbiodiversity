@@ -1,417 +1,144 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R for Biodiversity Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
 <script src="RBiodiversityPresentation_files/libs/clipboard/clipboard.min.js"></script>
-<script src="RBiodiversityPresentation_files/libs/quarto-html/tabby.min.js"></script>
+<script src="RBiodiversityPresentation_files/libs/quarto-html/quarto.js"></script>
 <script src="RBiodiversityPresentation_files/libs/quarto-html/popper.min.js"></script>
 <script src="RBiodiversityPresentation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="RBiodiversityPresentation_files/libs/quarto-html/anchor.min.js"></script>
 <link href="RBiodiversityPresentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="RBiodiversityPresentation_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="RBiodiversityPresentation_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.2.335">
+<link href="RBiodiversityPresentation_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="RBiodiversityPresentation_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="RBiodiversityPresentation_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="RBiodiversityPresentation_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="RBiodiversityPresentation_files/libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="RBiodiversityPresentation_files/libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="RBiodiversityPresentation_files/libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="RBiodiversityPresentation_files/libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="RBiodiversityPresentation_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="RBiodiversityPresentation_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="RBiodiversityPresentation_files/libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="RBiodiversityPresentation_files/libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
-  <title>R for Biodiversity Science</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="RBiodiversityPresentation_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="RBiodiversityPresentation_files/libs/revealjs/dist/reveal.css">
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="RBiodiversityPresentation_files/libs/revealjs/dist/theme/quarto.css" id="theme">
-  <link href="RBiodiversityPresentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="RBiodiversityPresentation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="RBiodiversityPresentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="RBiodiversityPresentation_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
 
-  .callout {
-    margin-top: 1em;
-    margin-bottom: 1em;  
-    border-radius: .25rem;
-  }
-
-  .callout.callout-style-simple { 
-    padding: 0em 0.5em;
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-    display: flex;
-  }
-
-  .callout.callout-style-default {
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-  }
-
-  .callout .callout-body-container {
-    flex-grow: 1;
-  }
-
-  .callout.callout-style-simple .callout-body {
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-style-default .callout-body {
-    font-size: 0.9rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-captioned.callout-style-simple .callout-body {
-    margin-top: 0.2em;
-  }
-
-  .callout:not(.callout-captioned) .callout-body {
-      display: flex;
-  }
-
-  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
-    padding-left: 1.6em;
-  }
-
-  .callout.callout-captioned .callout-header {
-    padding-top: 0.2em;
-    margin-bottom: -0.2em;
-  }
-
-  .callout.callout-captioned .callout-caption  p {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-    
-  .callout.callout-captioned.callout-style-simple .callout-content  p {
-    margin-top: 0;
-  }
-
-  .callout.callout-captioned.callout-style-default .callout-content  p {
-    margin-top: 0.7em;
-  }
-
-  .callout.callout-style-simple div.callout-caption {
-    border-bottom: none;
-    font-size: .9rem;
-    font-weight: 600;
-    opacity: 75%;
-  }
-
-  .callout.callout-style-default  div.callout-caption {
-    border-bottom: none;
-    font-weight: 600;
-    opacity: 85%;
-    font-size: 0.9rem;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-default div.callout-content {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-simple .callout-icon::before {
-    height: 1rem;
-    width: 1rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 1rem 1rem;
-  }
-
-  .callout.callout-style-default .callout-icon::before {
-    height: 0.9rem;
-    width: 0.9rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 0.9rem 0.9rem;
-  }
-
-  .callout-caption {
-    display: flex
-  }
-    
-  .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  .callout.no-icon::before {
-    display: none !important;
-  }
-
-  .callout.callout-captioned .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
-  }
-
-  .callout.callout-captioned .callout-icon::before {
-    margin-top: .5rem;
-    padding-right: .5rem;
-  }
-
-  .callout:not(.callout-captioned) .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  /* Callout Types */
-
-  div.callout-note {
-    border-left-color: #4582ec !important;
-  }
-
-  div.callout-note .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
-  }
-
-  div.callout-note.callout-style-default .callout-caption {
-    background-color: #dae6fb
-  }
-
-  div.callout-important {
-    border-left-color: #d9534f !important;
-  }
-
-  div.callout-important .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-important.callout-style-default .callout-caption {
-    background-color: #f7dddc
-  }
-
-  div.callout-warning {
-    border-left-color: #f0ad4e !important;
-  }
-
-  div.callout-warning .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-warning.callout-style-default .callout-caption {
-    background-color: #fcefdc
-  }
-
-  div.callout-tip {
-    border-left-color: #02b875 !important;
-  }
-
-  div.callout-tip .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-tip.callout-style-default .callout-caption {
-    background-color: #ccf1e3
-  }
-
-  div.callout-caution {
-    border-left-color: #fd7e14 !important;
-  }
-
-  div.callout-caution .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
-  }
-
-  div.callout-caution.callout-style-default .callout-caption {
-    background-color: #ffe5d0
-  }
-
-  </style>
-  <style type="text/css">
-    .reveal div.sourceCode {
-      margin: 0;
-      overflow: auto;
-    }
-    .reveal div.hanging-indent {
-      margin-left: 1em;
-      text-indent: -1em;
-    }
-    .reveal .slide:not(.center) {
-      height: 100%;
-    }
-    .reveal .slide.scrollable {
-      overflow-y: auto;
-    }
-    .reveal .footnotes {
-      height: 100%;
-      overflow-y: auto;
-    }
-    .reveal .slide .absolute {
-      position: absolute;
-      display: block;
-    }
-    .reveal .footnotes ol {
-      counter-reset: ol;
-      list-style-type: none; 
-      margin-left: 0;
-    }
-    .reveal .footnotes ol li:before {
-      counter-increment: ol;
-      content: counter(ol) ". "; 
-    }
-    .reveal .footnotes ol li > p:first-child {
-      display: inline-block;
-    }
-    .reveal .slide ul,
-    .reveal .slide ol {
-      margin-bottom: 0.5em;
-    }
-    .reveal .slide ul li,
-    .reveal .slide ol li {
-      margin-top: 0.4em;
-      margin-bottom: 0.2em;
-    }
-    .reveal .slide ul[role="tablist"] li {
-      margin-bottom: 0;
-    }
-    .reveal .slide ul li > *:first-child,
-    .reveal .slide ol li > *:first-child {
-      margin-block-start: 0;
-    }
-    .reveal .slide ul li > *:last-child,
-    .reveal .slide ol li > *:last-child {
-      margin-block-end: 0;
-    }
-    .reveal .slide .columns:nth-child(3) {
-      margin-block-start: 0.8em;
-    }
-    .reveal blockquote {
-      box-shadow: none;
-    }
-    .reveal .tippy-content>* {
-      margin-top: 0.2em;
-      margin-bottom: 0.7em;
-    }
-    .reveal .tippy-content>*:last-child {
-      margin-bottom: 0.2em;
-    }
-    .reveal .slide > img.stretch.quarto-figure-center,
-    .reveal .slide > img.r-stretch.quarto-figure-center {
-      display: block;
-      margin-left: auto;
-      margin-right: auto; 
-    }
-    .reveal .slide > img.stretch.quarto-figure-left,
-    .reveal .slide > img.r-stretch.quarto-figure-left  {
-      display: block;
-      margin-left: 0;
-      margin-right: auto; 
-    }
-    .reveal .slide > img.stretch.quarto-figure-right,
-    .reveal .slide > img.r-stretch.quarto-figure-right  {
-      display: block;
-      margin-left: auto;
-      margin-right: 0; 
-    }
-  </style>
-  <script src="RBiodiversityPresentation_files/libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-  <script src="RBiodiversityPresentation_files/libs/plotly-binding-4.10.0/plotly.js"></script>
-  <script src="RBiodiversityPresentation_files/libs/typedarray-0.1/typedarray.min.js"></script>
-  <script src="RBiodiversityPresentation_files/libs/jquery-3.5.1/jquery.min.js"></script>
-  <link href="RBiodiversityPresentation_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-  <script src="RBiodiversityPresentation_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-  <link href="RBiodiversityPresentation_files/libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
-  <script src="RBiodiversityPresentation_files/libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 </head>
-<body class="quarto-light">
-  <div class="reveal">
-    <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">R for Biodiversity Science</h1>
+<body class="fullcontent">
 
-<div class="quarto-title-authors">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">R for Biodiversity Science</h1>
 </div>
 
-</section>
-<section>
-<section id="data-management" class="title-slide slide level1 center">
-<h1>data management</h1>
 
-</section>
-<section id="read-in-data-in-one-line" class="slide level2">
-<h2>Read in data in one line</h2>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="data-management" class="level1">
+<h1>data management</h1>
+<section id="read-in-data-in-one-line" class="level2">
+<h2 class="anchored" data-anchor-id="read-in-data-in-one-line">Read in data in one line</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>soy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"soybean.csv"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a>soy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>soy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"soybean.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>soy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 464 × 10
    env   loc    year gen   yield height lodging  size protein   oil
@@ -431,31 +158,39 @@
 </div>
 </div>
 </section>
-<section id="filter" class="slide level2">
-<h2>Filter</h2>
+<section id="filter" class="level2">
+<h2 class="anchored" data-anchor-id="filter">Filter</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>soy <span class="sc">%&gt;%</span> </span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">filter</span>(gen <span class="sc">==</span> <span class="st">"G01"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>soy <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gen <span class="sc">==</span> <span class="fu">c</span>(<span class="st">"G01"</span>, <span class="st">"G02"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 8 × 10
-  env   loc         year gen   yield height lodging  size protein   oil
-  &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
-1 L70   Lawes       1970 G01   2.39   1.44     4.25  8.45    36.7  20.9
-2 B70   Brookstead  1970 G01   1.25   1.01     3.25  8.85    39.5  18.8
-3 N70   Nambour     1970 G01   2.26   0.75     2.25  9.25    34.2  22.3
-4 R70   RedlandBay  1970 G01   0.778  0.9      3.25  6.25    40.8  15.9
-5 L71   Lawes       1971 G01   2.79   0.97     2.5   8.35    39.4  18.7
-6 B71   Brookstead  1971 G01   2.56   0.965    3.25  8.9     40.3  18.2
-7 N71   Nambour     1971 G01   2.10   0.725    1.25  7.3     38.5  19.3
-8 R71   RedlandBay  1971 G01   1.18   0.97     2.25  6.75    42.1  16.9</code></pre>
+<pre><code># A tibble: 16 × 10
+   env   loc         year gen   yield height lodging  size protein   oil
+   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+ 1 L70   Lawes       1970 G01   2.39   1.44     4.25  8.45    36.7  20.9
+ 2 L70   Lawes       1970 G02   2.28   1.45     4.25  9.95    37.6  20.7
+ 3 B70   Brookstead  1970 G01   1.25   1.01     3.25  8.85    39.5  18.8
+ 4 B70   Brookstead  1970 G02   1.17   1.13     2.75  8.9     38.6  19.8
+ 5 N70   Nambour     1970 G01   2.26   0.75     2.25  9.25    34.2  22.3
+ 6 N70   Nambour     1970 G02   2.16   0.71     2     9.35    37.6  22.4
+ 7 R70   RedlandBay  1970 G01   0.778  0.9      3.25  6.25    40.8  15.9
+ 8 R70   RedlandBay  1970 G02   1.09   0.9      3.75  7.35    41.0  17.6
+ 9 L71   Lawes       1971 G01   2.79   0.97     2.5   8.35    39.4  18.7
+10 L71   Lawes       1971 G02   2.62   0.785    2.25  9.75    40.6  19.8
+11 B71   Brookstead  1971 G01   2.56   0.965    3.25  8.9     40.3  18.2
+12 B71   Brookstead  1971 G02   2.34   0.835    2.75 10.9     41.8  18.8
+13 N71   Nambour     1971 G01   2.10   0.725    1.25  7.3     38.5  19.3
+14 N71   Nambour     1971 G02   2.6    0.595    1     9.45    41.0  20.7
+15 R71   RedlandBay  1971 G01   1.18   0.97     2.25  6.75    42.1  16.9
+16 R71   RedlandBay  1971 G02   1.90   0.74     1.75  7.95    42.7  18.9</code></pre>
 </div>
 </div>
 </section>
-<section id="sort" class="slide level2">
-<h2>Sort</h2>
+<section id="sort" class="level2">
+<h2 class="anchored" data-anchor-id="sort">Sort</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>soy <span class="sc">%&gt;%</span> </span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">arrange</span>(yield)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>soy <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(yield)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 464 × 10
    env   loc         year gen   yield height lodging  size protein   oil
@@ -475,11 +210,11 @@
 </div>
 </div>
 </section>
-<section id="select" class="slide level2">
-<h2>Select</h2>
+<section id="select" class="level2">
+<h2 class="anchored" data-anchor-id="select">Select</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>soy <span class="sc">%&gt;%</span> </span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">select</span>(gen, yield)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>soy <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gen, yield)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 464 × 2
    gen   yield
@@ -499,11 +234,11 @@
 </div>
 </div>
 </section>
-<section id="advanced-select" class="slide level2">
-<h2>Advanced Select</h2>
+<section id="advanced-select" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-select">Advanced Select</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>soy <span class="sc">%&gt;%</span> </span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>soy <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 464 × 7
     year yield height lodging  size protein   oil
@@ -523,100 +258,142 @@
 </div>
 </div>
 </section>
-<section id="summarizing-data" class="slide level2">
-<h2>Summarizing data</h2>
+<section id="summarizing-data" class="level2">
+<h2 class="anchored" data-anchor-id="summarizing-data">Summarizing data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>soy <span class="sc">%&gt;%</span> </span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">group_by</span>(loc) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">summarize</span>(<span class="at">mean_yield =</span> <span class="fu">mean</span>(yield))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>soy <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(loc, year) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_yield =</span> <span class="fu">mean</span>(yield), </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_yield =</span> <span class="fu">sd</span>(yield))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'loc'. You can override using the `.groups`
+argument.</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
-  loc        mean_yield
-  &lt;chr&gt;           &lt;dbl&gt;
-1 Brookstead       2.01
-2 Lawes            2.37
-3 Nambour          2.09
-4 RedlandBay       1.72</code></pre>
+<pre><code># A tibble: 8 × 4
+# Groups:   loc [4]
+  loc         year mean_yield sd_yield
+  &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+1 Brookstead  1970       1.56    0.736
+2 Brookstead  1971       2.46    0.649
+3 Lawes       1970       2.24    0.699
+4 Lawes       1971       2.51    0.579
+5 Nambour     1970       1.89    0.424
+6 Nambour     1971       2.30    0.452
+7 RedlandBay  1970       1.64    0.983
+8 RedlandBay  1971       1.79    0.680</code></pre>
 </div>
 </div>
-</section></section>
-<section>
-<section id="data-visualization" class="title-slide slide level1 center">
+</section>
+</section>
+<section id="data-visualization" class="level1">
 <h1>data visualization</h1>
-
-</section>
-<section id="basic-plotting" class="slide level2">
-<h2>basic plotting</h2>
+<section id="basic-plotting" class="level2">
+<h2 class="anchored" data-anchor-id="basic-plotting">basic plotting</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>soy <span class="sc">%&gt;%</span> </span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> oil, <span class="at">y =</span> protein)) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="RBiodiversityPresentation_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
-<section id="customize-your-plot" class="slide level2">
-<h2>customize your plot</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>soy <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> oil, <span class="at">y =</span> protein, <span class="at">color =</span> loc)) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="RBiodiversityPresentation_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
-<section id="customize-even-furthur" class="slide level2">
-<h2>customize even furthur</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>my_graph <span class="ot">&lt;-</span> soy <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> oil, <span class="at">y =</span> protein, <span class="at">color =</span> loc)) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>) <span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">15</span>) </span>
-<span id="cb15-6"><a href="#cb15-6"></a></span>
-<span id="cb15-7"><a href="#cb15-7"></a>my_graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="RBiodiversityPresentation_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
-<section id="create-complex-graphs" class="slide level2">
-<h2>Create complex graphs</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>my_graph <span class="sc">+</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">facet_grid</span>(year <span class="sc">~</span> loc) <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="RBiodiversityPresentation_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
-<section id="d-mapping" class="slide level2">
-<h2>3D mapping</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb17-2"><a href="#cb17-2"></a></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="fu">plot_ly</span>(soy, <span class="at">x =</span> <span class="sc">~</span>protein, <span class="at">y =</span> <span class="sc">~</span>oil, <span class="at">z =</span> <span class="sc">~</span>height, <span class="at">color =</span> <span class="sc">~</span> <span class="fu">factor</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">add_markers</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>soy <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> oil, <span class="at">y =</span> protein)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="htmlwidget-a894ef7d24b39d9fafc3" style="width:960px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a894ef7d24b39d9fafc3">{"x":{"visdat":{"3afc2f4d7406":["function () ","plotlyVisDat"]},"cur_data":"3afc2f4d7406","attrs":{"3afc2f4d7406":{"x":{},"y":{},"z":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"protein"},"yaxis":{"title":"oil"},"zaxis":{"title":"height"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[36.7,37.55,37.8,38.45,37.5,38.25,37.35,35.2,35.9,39.7,40.25,40.3,41.15,37.4,36.65,39.65,43.7,42.4,41.05,41.1,37.8,40.35,41.55,40.7,37.45,39.75,39,38.4,39.35,41.6,39.35,42.15,38.3,38.35,40.6,44,42.8,39.25,40.55,41.2,39.9,41.4,42.2,40.4,37,39.6,36.8,38.15,35.5,39.9,41.65,41,37.65,40.2,40.8,39.8,40.6,40.9,39.5,38.6,37.8,38.7,37.8,37.4,37.85,38.5,37.9,38.35,41.15,43.6,41.75,38.3,39.25,40.6,44.6,44.6,43,45,40.8,45.8,42.8,38.95,38.2,38.6,40.9,38.2,40.35,40.25,40.65,43.6,39.35,40.2,40.1,40.95,44.45,40.85,42.75,41.85,41.3,41.95,41.75,39.35,35.85,37.05,38.95,37.9,37.25,34.2,40.5,40.35,38.4,37,37.4,39.25,41.4,42.1,34.25,37.6,35.5,34.35,33.2,35.1,34.15,35.75,34.55,33.7,37.05,38.7,37.65,34.8,37.65,36.4,39.6,38,39.45,38.95,37.1,37.5,36.35,38.9,36.6,37.85,36.75,33.2,37.9,35.95,36.8,39.2,34.7,36.5,36.25,35.55,39.9,37.75,37.45,37.75,37.65,37.75,36.2,35.55,35.55,34.35,38.8,35.95,33.25,34.95,38.45,36.45,39.55,37.4,38,39.05,38.95,39.2,40.75,40.95,39.8,39.95,37.4,38,37.7,39.5,38.2,39.35,42.9,41.75,42.6,40.05,40.45,42.85,44.75,46,43.2,43.9,43.6,45.05,41.55,40.75,40.1,40.25,40.55,39.8,41.15,44.6,42.55,43.8,40.15,42.7,40.95,42.9,42.1,40.95,42.9,43.25,40.9,44.5,41.75,37.2,36.75,37.95,37.8,38.25,36.3,40.2,38.75,38.15,38.35,37.2,38.9,38,38.2,37.45],"y":[20.895,20.74,21.295,21.99,22.13,21.16,21.7,21.145,21.495,20.43,19.09,18.745,19.18,20.76,20.685,20.435,17.455,17.4,19.395,18.215,18.645,18.95,18.675,21.2,22.055,20.07,20.71,21.03,19.935,18.91,20.165,18.695,20.825,20.135,19.635,17.91,19.155,20.74,19.93,19.625,20.97,21.37,17.995,20.94,23.735,22.03,23.83,24.43,21.825,24.565,19.66,20.21,24.4,22.905,22.315,22.585,23.18,20.78,18.85,19.835,20.355,20.385,20.78,19.92,20.29,17.88,20.05,19.745,17.915,16.785,17.15,18.835,19.115,19.07,16.22,15.655,17.4,17.315,17.59,16.96,17.3,20.495,20.165,19.92,19.415,19.99,17.965,16.495,19.27,18.415,19.745,18.76,19.15,16.56,17.42,19.76,19.36,19.125,19.755,19.15,16.905,19.715,22.175,23.08,22.46,24.095,21.825,25.045,20.345,17.37,23.535,22.105,24.925,22.205,22.14,19.415,22.33,22.445,23.68,23.175,24.82,23.17,24.1,21.445,23.1,22.045,22.355,20.945,21.71,22.745,22.13,23.01,20.23,20.1,20.455,19.93,20.88,20.34,20.755,22.455,24.01,21.96,22.74,23.395,21.37,22.135,21.985,21.3,22.8,22.35,21.03,21.555,20.625,22.8,22.95,22.4,22.015,21.91,21.235,24.52,25.24,25.65,23.505,25.8,25.725,26.845,23.46,24.64,23.615,25.92,24.57,23.58,24.755,20.845,15.92,17.645,19.975,21.075,21.425,19.91,20.735,19.13,19.76,20.015,14.23,13.88,15.21,17.32,17.375,15.41,13.06,13.615,18.325,14.845,13.03,13.395,14.075,18.055,18.585,17.285,17.41,16.75,18.685,16.245,15.65,16.07,19.075,16.265,17.05,14.32,17.985,17.305,18.21,17.265,20.81,20.795,16.065,23.815,24.105,23.425,25.095,24.525,23.41,24.76,23.995,24.545,24.575,25.815,24.345,23.955,23.675,24.63],"z":[1.445,1.45,1.46,1.26,1.335,1.36,1.3,0.955,1.03,1.155,1.42,1.435,1.585,1.33,1.37,1.7,1.28,1.495,1.37,1.32,1.575,1.345,1.485,1.46,1.46,1.18,1.18,1.625,1.13,1.435,1.22,1.73,1.41,1.475,1.105,0.915,1.7,1.17,1.61,1.205,1.385,1.36,1.105,0.875,0.785,0.81,0.85,0.76,1.08,0.835,0.79,0.66,0.94,0.71,0.86,0.74,0.8,0.81,1.015,1.13,1.155,1.235,1.12,1.105,1.13,1.12,1.04,1.045,1.015,1.095,1.255,1.045,1.025,0.54,1.09,1.04,1.205,1.115,0.94,0.89,1.14,0.99,1.19,1.13,1.22,1.17,1.195,1.07,1.055,1.155,1.18,1.18,1.055,1.105,1.04,0.94,1.105,1.245,1.32,1.32,0.915,0.86,0.775,0.8,0.875,0.93,1.07,0.94,0.71,0.56,0.9,0.675,0.71,0.765,0.71,0.66,0.75,0.71,0.685,0.71,0.71,0.595,0.645,0.595,0.71,0.595,0.65,0.785,0.86,0.725,0.76,0.71,0.685,0.835,0.76,0.685,0.825,0.685,0.825,0.725,0.71,0.61,0.76,0.7,0.785,0.875,0.8,0.955,0.775,0.94,0.8,0.835,0.91,0.66,0.91,0.825,0.825,1,0.725,0.435,0.42,0.395,0.535,0.42,0.495,0.435,0.395,0.33,0.48,0.455,0.3,0.41,0.355,0.395,0.9,0.9,0.835,1.005,0.85,0.93,0.9,0.89,0.93,0.85,1.005,1.05,0.995,1.105,1,0.965,0.89,1.08,1.215,1.08,0.86,0.98,1.005,0.9,1.09,0.995,0.925,1.115,1.445,1.07,0.93,0.955,1.015,0.99,1.12,0.915,1.12,0.825,1.28,0.995,1.04,1.095,1.005,0.61,0.56,0.495,0.605,0.52,1.02,0.595,0.61,0.545,0.585,0.685,0.43,0.56,0.545,0.62],"type":"scatter3d","mode":"markers","name":"1970","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"line":{"color":"rgba(102,194,165,1)"},"frame":null},{"x":[39.4,40.6,37.4,36.9,38.7,38.1,37.45,36.65,37.1,37.85,43.45,44.45,42.2,38.45,40.7,37.4,45.5,43.65,42.25,45.15,37.6,44.35,42.6,40.55,38.9,40.8,39.8,38.95,42.2,43.55,40.15,41.55,37,41.2,41.15,43.75,43.55,38.6,42.15,42.25,39.7,40.75,40.7,36.9,36.3,36.75,38.85,39.1,37.5,40.05,38.7,38.3,37.45,37.5,42.05,38.5,38.6,37.35,40.3,41.75,39.75,38.5,39.4,37.6,37.4,37.7,39.55,39.95,43.35,44,46,41,44.15,41.95,44.95,48.1,45.45,47.9,42.7,48.5,44.25,42,39.45,43.8,42.7,41.6,42.95,45.2,42.05,43.35,39.9,41.75,43.5,44.8,44.9,42.7,41.8,42.25,41.25,44.65,43.55,41.45,37.9,38.3,39.65,38.1,37.5,40.2,41.6,41.3,39.05,38.8,41.6,41.05,41.4,36.5,38.5,40.95,41.65,39.4,37.2,37.9,37.4,39.35,39.35,38.35,40.75,42.9,42.6,38.4,40.85,40.5,43.7,44.55,42.25,42.45,41.1,44.1,42.05,42.55,40.1,42.15,43.8,38.45,41.55,46.65,40.35,41.95,38.05,42.05,41.65,42.05,42.5,41.35,40.55,43.65,39.9,44.75,41.4,38.85,38.85,39,40.85,38.8,39,43.15,42.6,40.25,41.75,40.65,43.3,42.4,41.2,40.75,42.1,42.7,39.85,40.4,37.75,39.05,39.9,40.7,40.35,39.45,46.9,45.3,47.5,44.9,44.2,43.15,47.75,45.25,44.8,46.05,46.8,47.45,46.95,41.95,41.5,44.05,42.05,42.8,43.7,48,44.8,46.05,42.8,45.8,44.8,47.8,48.1,42.7,45.4,44.5,44.3,43.45,43.95,38.55,39.3,36.95,40.55,40.25,36.6,41.5,40.35,37.95,39.05,38.6,40.45,40.6,42.15,37.35],"y":[18.665,19.79,20.93,20.255,20.89,20.745,20.97,19.675,20.325,19.505,17.585,16.595,17.265,18.525,17.85,18.75,16,16.135,17.59,16.415,16.98,15.97,16.875,20.21,19.955,18.85,18.92,19.505,18.225,17.035,18.325,17.18,18.925,17.925,18.155,16.925,17.7,18.925,18.335,18.73,19.14,19.93,16.925,22.195,23.73,23.25,23.435,24.085,23.07,23.515,21.65,22.745,23.58,24.125,22.905,22.88,22.815,22.72,18.235,18.75,19.57,19.52,19.9,19.55,19.53,18.985,18.24,18.61,16.485,16.075,16.65,18.035,17.53,18.7,14.985,14.73,16.665,15.77,16.735,15.535,16.935,19.195,19.365,19.195,18.78,19.18,17.05,15.565,17.675,17.285,18.025,18.45,17.91,16.11,16.87,18.67,18.15,19.12,18.195,19.2,17.03,20.015,22.135,20.495,23.19,23.82,22.18,23.32,20.885,20.08,22.135,23.405,21.945,22.1,21.705,22.08,19.285,20.665,19.945,21.81,22.325,21.815,22.255,21.055,20.825,19.985,18.24,16.59,17.82,19.35,18.865,19.365,15.865,15.76,18.885,18.08,18.265,16.145,16.83,18.745,22.35,18.965,19.31,20.005,19.515,16.935,18.25,19.08,20.375,18.775,18.06,18.775,18.23,19.53,19.445,19.175,21.45,19.955,17.905,22.52,22.495,22.745,21.47,23.82,23.175,22.555,21.55,22.555,22.63,23.5,22.17,21.405,22.125,22.8,16.855,18.86,19.67,20.36,21.42,20.4,20.515,19.19,19.54,19.675,16.45,15.47,15.305,14.98,17.03,17.42,15.99,17.195,16.465,16.615,16.48,15.26,14.64,18.515,19.055,17.475,18.105,17.545,19.475,15.97,17.38,16.485,17.975,16.085,16.49,15.545,15.815,17.285,17.235,17.645,18.88,19.815,18.42,21.66,21.665,22.515,22.41,22.21,22.61,21.82,21.31,22.205,22.525,24.25,21.545,20.39,21.435,22.27],"z":[0.97,0.785,0.955,0.76,0.76,0.65,0.8,0.9,0.825,0.785,0.875,1.155,1.08,0.865,0.675,0.98,0.995,1.245,0.76,0.97,1.105,1.07,0.955,0.84,0.925,0.865,0.855,0.735,0.94,1.015,0.94,1.045,1,0.825,0.97,0.89,1.095,0.79,0.94,0.905,1.015,1.08,0.915,0.725,0.56,0.52,0.61,0.545,0.66,0.535,0.42,0.435,0.51,0.455,0.405,0.47,0.685,0.44,0.965,0.835,0.98,0.9,0.975,0.94,0.95,0.915,0.85,0.81,1.08,1.12,1.13,1.13,1.12,1.12,0.97,0.98,1.145,1.045,1.13,0.99,1.03,0.98,0.95,0.98,1.065,1.055,1.055,0.965,1.02,1.17,1.02,1.07,1.105,1.045,1.12,0.94,1.295,1.07,1.37,1.045,0.97,0.76,0.735,0.735,0.725,0.79,1.005,0.75,0.63,0.58,0.675,0.67,0.57,0.69,0.635,0.675,0.725,0.595,0.61,0.7,0.66,0.57,0.685,0.57,0.605,0.57,0.7,0.76,0.89,0.775,0.725,0.75,0.8,0.79,0.69,0.71,0.765,0.725,0.75,0.62,0.635,0.535,0.57,0.75,0.785,0.825,0.815,0.835,0.74,0.835,0.76,0.735,0.875,0.57,0.88,0.675,0.785,0.775,0.785,0.395,0.42,0.435,0.365,0.445,0.535,0.34,0.41,0.355,0.42,0.355,0.25,0.345,0.395,0.365,0.97,0.74,0.835,0.965,0.835,0.825,0.86,0.835,0.885,0.8,0.99,0.91,1.04,0.885,0.99,0.94,1.045,0.915,0.94,0.955,1.07,0.99,0.99,0.915,0.9,0.825,0.875,0.885,1.27,0.965,0.915,1.4,0.885,1.08,1.28,0.925,0.98,0.785,1.4,1.02,0.965,0.81,0.925,0.635,0.61,0.61,0.61,0.665,0.905,0.505,0.56,0.545,0.61,0.575,0.33,0.52,0.445,0.65],"type":"scatter3d","mode":"markers","name":"1971","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"line":{"color":"rgba(141,160,203,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p><img src="RBiodiversityPresentation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section></section>
-<section>
-<section id="statistics" class="title-slide slide level1 center">
-<h1>Statistics</h1>
-
 </section>
-<section id="comparing-groups-visually" class="slide level2">
-<h2>comparing groups visually</h2>
+<section id="customize-your-plot" class="level2">
+<h2 class="anchored" data-anchor-id="customize-your-plot">customize your plot</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb18-2"><a href="#cb18-2"></a></span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="fu">ggbarplot</span>(soy, <span class="at">x =</span> <span class="st">"loc"</span>, <span class="at">y =</span> <span class="st">"oil"</span>, <span class="at">add =</span> <span class="st">"mean_sd"</span>, <span class="at">fill =</span> <span class="st">"loc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>soy <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> oil, <span class="at">y =</span> protein, <span class="at">color =</span> loc)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="RBiodiversityPresentation_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
-<img data-src="RBiodiversityPresentation_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
-<section id="statistical-test-with-anova" class="slide level2">
-<h2>statistical test with ANOVA</h2>
+</div>
+</section>
+<section id="customize-even-furthur" class="level2">
+<h2 class="anchored" data-anchor-id="customize-even-furthur">customize even furthur</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>loc_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(oil <span class="sc">~</span> loc, <span class="at">data =</span> soy)</span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">summary</span>(loc_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> soy <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> oil, <span class="at">y =</span> protein, <span class="at">color =</span> loc)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>, <span class="at">base_family =</span> <span class="st">"serif"</span>) </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>my_graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="RBiodiversityPresentation_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="create-complex-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="create-complex-graphs">Create complex graphs</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(year <span class="sc">~</span> loc) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="RBiodiversityPresentation_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="d-mapping" class="level2">
+<h2 class="anchored" data-anchor-id="d-mapping">3D mapping</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'plotly'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:ggplot2':
+
+    last_plot</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:graphics':
+
+    layout</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(soy, <span class="at">x =</span> <span class="sc">~</span>protein, <span class="at">y =</span> <span class="sc">~</span>oil, <span class="at">z =</span> <span class="sc">~</span>height, <span class="at">color =</span> <span class="sc">~</span> <span class="fu">factor</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_markers</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in RColorBrewer::brewer.pal(N, "Set2"): minimal value for n is 3, returning requested palette with 3 different levels
+
+Warning in RColorBrewer::brewer.pal(N, "Set2"): minimal value for n is 3, returning requested palette with 3 different levels</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="htmlwidget-1cf2f7303255a6e7b0e7" style="width:100%;height:464px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1cf2f7303255a6e7b0e7">{"x":{"visdat":{"74738fc2e4":["function () ","plotlyVisDat"]},"cur_data":"74738fc2e4","attrs":{"74738fc2e4":{"x":{},"y":{},"z":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"protein"},"yaxis":{"title":"oil"},"zaxis":{"title":"height"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[36.7,37.55,37.8,38.45,37.5,38.25,37.35,35.2,35.9,39.7,40.25,40.3,41.15,37.4,36.65,39.65,43.7,42.4,41.05,41.1,37.8,40.35,41.55,40.7,37.45,39.75,39,38.4,39.35,41.6,39.35,42.15,38.3,38.35,40.6,44,42.8,39.25,40.55,41.2,39.9,41.4,42.2,40.4,37,39.6,36.8,38.15,35.5,39.9,41.65,41,37.65,40.2,40.8,39.8,40.6,40.9,39.5,38.6,37.8,38.7,37.8,37.4,37.85,38.5,37.9,38.35,41.15,43.6,41.75,38.3,39.25,40.6,44.6,44.6,43,45,40.8,45.8,42.8,38.95,38.2,38.6,40.9,38.2,40.35,40.25,40.65,43.6,39.35,40.2,40.1,40.95,44.45,40.85,42.75,41.85,41.3,41.95,41.75,39.35,35.85,37.05,38.95,37.9,37.25,34.2,40.5,40.35,38.4,37,37.4,39.25,41.4,42.1,34.25,37.6,35.5,34.35,33.2,35.1,34.15,35.75,34.55,33.7,37.05,38.7,37.65,34.8,37.65,36.4,39.6,38,39.45,38.95,37.1,37.5,36.35,38.9,36.6,37.85,36.75,33.2,37.9,35.95,36.8,39.2,34.7,36.5,36.25,35.55,39.9,37.75,37.45,37.75,37.65,37.75,36.2,35.55,35.55,34.35,38.8,35.95,33.25,34.95,38.45,36.45,39.55,37.4,38,39.05,38.95,39.2,40.75,40.95,39.8,39.95,37.4,38,37.7,39.5,38.2,39.35,42.9,41.75,42.6,40.05,40.45,42.85,44.75,46,43.2,43.9,43.6,45.05,41.55,40.75,40.1,40.25,40.55,39.8,41.15,44.6,42.55,43.8,40.15,42.7,40.95,42.9,42.1,40.95,42.9,43.25,40.9,44.5,41.75,37.2,36.75,37.95,37.8,38.25,36.3,40.2,38.75,38.15,38.35,37.2,38.9,38,38.2,37.45],"y":[20.895,20.74,21.295,21.99,22.13,21.16,21.7,21.145,21.495,20.43,19.09,18.745,19.18,20.76,20.685,20.435,17.455,17.4,19.395,18.215,18.645,18.95,18.675,21.2,22.055,20.07,20.71,21.03,19.935,18.91,20.165,18.695,20.825,20.135,19.635,17.91,19.155,20.74,19.93,19.625,20.97,21.37,17.995,20.94,23.735,22.03,23.83,24.43,21.825,24.565,19.66,20.21,24.4,22.905,22.315,22.585,23.18,20.78,18.85,19.835,20.355,20.385,20.78,19.92,20.29,17.88,20.05,19.745,17.915,16.785,17.15,18.835,19.115,19.07,16.22,15.655,17.4,17.315,17.59,16.96,17.3,20.495,20.165,19.92,19.415,19.99,17.965,16.495,19.27,18.415,19.745,18.76,19.15,16.56,17.42,19.76,19.36,19.125,19.755,19.15,16.905,19.715,22.175,23.08,22.46,24.095,21.825,25.045,20.345,17.37,23.535,22.105,24.925,22.205,22.14,19.415,22.33,22.445,23.68,23.175,24.82,23.17,24.1,21.445,23.1,22.045,22.355,20.945,21.71,22.745,22.13,23.01,20.23,20.1,20.455,19.93,20.88,20.34,20.755,22.455,24.01,21.96,22.74,23.395,21.37,22.135,21.985,21.3,22.8,22.35,21.03,21.555,20.625,22.8,22.95,22.4,22.015,21.91,21.235,24.52,25.24,25.65,23.505,25.8,25.725,26.845,23.46,24.64,23.615,25.92,24.57,23.58,24.755,20.845,15.92,17.645,19.975,21.075,21.425,19.91,20.735,19.13,19.76,20.015,14.23,13.88,15.21,17.32,17.375,15.41,13.06,13.615,18.325,14.845,13.03,13.395,14.075,18.055,18.585,17.285,17.41,16.75,18.685,16.245,15.65,16.07,19.075,16.265,17.05,14.32,17.985,17.305,18.21,17.265,20.81,20.795,16.065,23.815,24.105,23.425,25.095,24.525,23.41,24.76,23.995,24.545,24.575,25.815,24.345,23.955,23.675,24.63],"z":[1.445,1.45,1.46,1.26,1.335,1.36,1.3,0.955,1.03,1.155,1.42,1.435,1.585,1.33,1.37,1.7,1.28,1.495,1.37,1.32,1.575,1.345,1.485,1.46,1.46,1.18,1.18,1.625,1.13,1.435,1.22,1.73,1.41,1.475,1.105,0.915,1.7,1.17,1.61,1.205,1.385,1.36,1.105,0.875,0.785,0.81,0.85,0.76,1.08,0.835,0.79,0.66,0.94,0.71,0.86,0.74,0.8,0.81,1.015,1.13,1.155,1.235,1.12,1.105,1.13,1.12,1.04,1.045,1.015,1.095,1.255,1.045,1.025,0.54,1.09,1.04,1.205,1.115,0.94,0.89,1.14,0.99,1.19,1.13,1.22,1.17,1.195,1.07,1.055,1.155,1.18,1.18,1.055,1.105,1.04,0.94,1.105,1.245,1.32,1.32,0.915,0.86,0.775,0.8,0.875,0.93,1.07,0.94,0.71,0.56,0.9,0.675,0.71,0.765,0.71,0.66,0.75,0.71,0.685,0.71,0.71,0.595,0.645,0.595,0.71,0.595,0.65,0.785,0.86,0.725,0.76,0.71,0.685,0.835,0.76,0.685,0.825,0.685,0.825,0.725,0.71,0.61,0.76,0.7,0.785,0.875,0.8,0.955,0.775,0.94,0.8,0.835,0.91,0.66,0.91,0.825,0.825,1,0.725,0.435,0.42,0.395,0.535,0.42,0.495,0.435,0.395,0.33,0.48,0.455,0.3,0.41,0.355,0.395,0.9,0.9,0.835,1.005,0.85,0.93,0.9,0.89,0.93,0.85,1.005,1.05,0.995,1.105,1,0.965,0.89,1.08,1.215,1.08,0.86,0.98,1.005,0.9,1.09,0.995,0.925,1.115,1.445,1.07,0.93,0.955,1.015,0.99,1.12,0.915,1.12,0.825,1.28,0.995,1.04,1.095,1.005,0.61,0.56,0.495,0.605,0.52,1.02,0.595,0.61,0.545,0.585,0.685,0.43,0.56,0.545,0.62],"type":"scatter3d","mode":"markers","name":"1970","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"line":{"color":"rgba(102,194,165,1)"},"frame":null},{"x":[39.4,40.6,37.4,36.9,38.7,38.1,37.45,36.65,37.1,37.85,43.45,44.45,42.2,38.45,40.7,37.4,45.5,43.65,42.25,45.15,37.6,44.35,42.6,40.55,38.9,40.8,39.8,38.95,42.2,43.55,40.15,41.55,37,41.2,41.15,43.75,43.55,38.6,42.15,42.25,39.7,40.75,40.7,36.9,36.3,36.75,38.85,39.1,37.5,40.05,38.7,38.3,37.45,37.5,42.05,38.5,38.6,37.35,40.3,41.75,39.75,38.5,39.4,37.6,37.4,37.7,39.55,39.95,43.35,44,46,41,44.15,41.95,44.95,48.1,45.45,47.9,42.7,48.5,44.25,42,39.45,43.8,42.7,41.6,42.95,45.2,42.05,43.35,39.9,41.75,43.5,44.8,44.9,42.7,41.8,42.25,41.25,44.65,43.55,41.45,37.9,38.3,39.65,38.1,37.5,40.2,41.6,41.3,39.05,38.8,41.6,41.05,41.4,36.5,38.5,40.95,41.65,39.4,37.2,37.9,37.4,39.35,39.35,38.35,40.75,42.9,42.6,38.4,40.85,40.5,43.7,44.55,42.25,42.45,41.1,44.1,42.05,42.55,40.1,42.15,43.8,38.45,41.55,46.65,40.35,41.95,38.05,42.05,41.65,42.05,42.5,41.35,40.55,43.65,39.9,44.75,41.4,38.85,38.85,39,40.85,38.8,39,43.15,42.6,40.25,41.75,40.65,43.3,42.4,41.2,40.75,42.1,42.7,39.85,40.4,37.75,39.05,39.9,40.7,40.35,39.45,46.9,45.3,47.5,44.9,44.2,43.15,47.75,45.25,44.8,46.05,46.8,47.45,46.95,41.95,41.5,44.05,42.05,42.8,43.7,48,44.8,46.05,42.8,45.8,44.8,47.8,48.1,42.7,45.4,44.5,44.3,43.45,43.95,38.55,39.3,36.95,40.55,40.25,36.6,41.5,40.35,37.95,39.05,38.6,40.45,40.6,42.15,37.35],"y":[18.665,19.79,20.93,20.255,20.89,20.745,20.97,19.675,20.325,19.505,17.585,16.595,17.265,18.525,17.85,18.75,16,16.135,17.59,16.415,16.98,15.97,16.875,20.21,19.955,18.85,18.92,19.505,18.225,17.035,18.325,17.18,18.925,17.925,18.155,16.925,17.7,18.925,18.335,18.73,19.14,19.93,16.925,22.195,23.73,23.25,23.435,24.085,23.07,23.515,21.65,22.745,23.58,24.125,22.905,22.88,22.815,22.72,18.235,18.75,19.57,19.52,19.9,19.55,19.53,18.985,18.24,18.61,16.485,16.075,16.65,18.035,17.53,18.7,14.985,14.73,16.665,15.77,16.735,15.535,16.935,19.195,19.365,19.195,18.78,19.18,17.05,15.565,17.675,17.285,18.025,18.45,17.91,16.11,16.87,18.67,18.15,19.12,18.195,19.2,17.03,20.015,22.135,20.495,23.19,23.82,22.18,23.32,20.885,20.08,22.135,23.405,21.945,22.1,21.705,22.08,19.285,20.665,19.945,21.81,22.325,21.815,22.255,21.055,20.825,19.985,18.24,16.59,17.82,19.35,18.865,19.365,15.865,15.76,18.885,18.08,18.265,16.145,16.83,18.745,22.35,18.965,19.31,20.005,19.515,16.935,18.25,19.08,20.375,18.775,18.06,18.775,18.23,19.53,19.445,19.175,21.45,19.955,17.905,22.52,22.495,22.745,21.47,23.82,23.175,22.555,21.55,22.555,22.63,23.5,22.17,21.405,22.125,22.8,16.855,18.86,19.67,20.36,21.42,20.4,20.515,19.19,19.54,19.675,16.45,15.47,15.305,14.98,17.03,17.42,15.99,17.195,16.465,16.615,16.48,15.26,14.64,18.515,19.055,17.475,18.105,17.545,19.475,15.97,17.38,16.485,17.975,16.085,16.49,15.545,15.815,17.285,17.235,17.645,18.88,19.815,18.42,21.66,21.665,22.515,22.41,22.21,22.61,21.82,21.31,22.205,22.525,24.25,21.545,20.39,21.435,22.27],"z":[0.97,0.785,0.955,0.76,0.76,0.65,0.8,0.9,0.825,0.785,0.875,1.155,1.08,0.865,0.675,0.98,0.995,1.245,0.76,0.97,1.105,1.07,0.955,0.84,0.925,0.865,0.855,0.735,0.94,1.015,0.94,1.045,1,0.825,0.97,0.89,1.095,0.79,0.94,0.905,1.015,1.08,0.915,0.725,0.56,0.52,0.61,0.545,0.66,0.535,0.42,0.435,0.51,0.455,0.405,0.47,0.685,0.44,0.965,0.835,0.98,0.9,0.975,0.94,0.95,0.915,0.85,0.81,1.08,1.12,1.13,1.13,1.12,1.12,0.97,0.98,1.145,1.045,1.13,0.99,1.03,0.98,0.95,0.98,1.065,1.055,1.055,0.965,1.02,1.17,1.02,1.07,1.105,1.045,1.12,0.94,1.295,1.07,1.37,1.045,0.97,0.76,0.735,0.735,0.725,0.79,1.005,0.75,0.63,0.58,0.675,0.67,0.57,0.69,0.635,0.675,0.725,0.595,0.61,0.7,0.66,0.57,0.685,0.57,0.605,0.57,0.7,0.76,0.89,0.775,0.725,0.75,0.8,0.79,0.69,0.71,0.765,0.725,0.75,0.62,0.635,0.535,0.57,0.75,0.785,0.825,0.815,0.835,0.74,0.835,0.76,0.735,0.875,0.57,0.88,0.675,0.785,0.775,0.785,0.395,0.42,0.435,0.365,0.445,0.535,0.34,0.41,0.355,0.42,0.355,0.25,0.345,0.395,0.365,0.97,0.74,0.835,0.965,0.835,0.825,0.86,0.835,0.885,0.8,0.99,0.91,1.04,0.885,0.99,0.94,1.045,0.915,0.94,0.955,1.07,0.99,0.99,0.915,0.9,0.825,0.875,0.885,1.27,0.965,0.915,1.4,0.885,1.08,1.28,0.925,0.98,0.785,1.4,1.02,0.965,0.81,0.925,0.635,0.61,0.61,0.61,0.665,0.905,0.505,0.56,0.545,0.61,0.575,0.33,0.52,0.445,0.65],"type":"scatter3d","mode":"markers","name":"1971","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"line":{"color":"rgba(141,160,203,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+</section>
+<section id="statistics" class="level1">
+<h1>Statistics</h1>
+<section id="comparing-groups-visually" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-groups-visually">comparing groups visually</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbarplot</span>(soy, <span class="at">x =</span> <span class="st">"loc"</span>, <span class="at">y =</span> <span class="st">"oil"</span>, <span class="at">add =</span> <span class="st">"mean_sd"</span>, <span class="at">fill =</span> <span class="st">"loc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="RBiodiversityPresentation_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="statistical-test-with-anova" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-test-with-anova">statistical test with ANOVA</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>loc_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(oil <span class="sc">~</span> loc, <span class="at">data =</span> soy)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(loc_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
 loc           3  432.6  144.22   23.04 6.5e-14 ***
@@ -626,12 +403,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
-<section id="post-comparison" class="slide level2">
-<h2>post-comparison</h2>
+<section id="post-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="post-comparison">post-comparison</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">library</span>(agricolae)</span>
-<span id="cb21-2"><a href="#cb21-2"></a>loc_hsd <span class="ot">&lt;-</span> <span class="fu">HSD.test</span>(loc_anova, <span class="at">trt =</span> <span class="st">"loc"</span>)</span>
-<span id="cb21-3"><a href="#cb21-3"></a>loc_hsd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>loc_hsd <span class="ot">&lt;-</span> <span class="fu">HSD.test</span>(loc_anova, <span class="at">trt =</span> <span class="st">"loc"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>loc_hsd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$statistics
    MSerror  Df     Mean      CV       MSD
@@ -663,51 +440,78 @@ attr(,"class")
 </div>
 </div>
 </section>
-<section id="plot-the-posthoc-results" class="slide level2">
-<h2>plot the posthoc results</h2>
+<section id="plot-the-posthoc-results" class="level2">
+<h2 class="anchored" data-anchor-id="plot-the-posthoc-results">plot the posthoc results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">plot</span>(loc_hsd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(loc_hsd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="RBiodiversityPresentation_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
-<img data-src="RBiodiversityPresentation_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section></section>
-<section>
-<section id="map-making" class="title-slide slide level1 center">
+</div>
+</section>
+</section>
+<section id="map-making" class="level1">
 <h1>map making</h1>
-
+<section id="download-boundary-data-from-online-and-plot" class="level2">
+<h2 class="anchored" data-anchor-id="download-boundary-data-from-online-and-plot">Download boundary data from online and plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>thailand <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"world"</span>, <span class="st">"thailand"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(thailand, <span class="fu">aes</span>(long, lat, <span class="at">group =</span> group)) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">fill =</span> <span class="st">"brown"</span>) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_quickmap</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="RBiodiversityPresentation_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
-<section id="download-boundary-data-from-online-and-plot" class="slide level2">
-<h2>Download boundary data from online and plot</h2>
+<section id="plot-distribution-of-our-plant" class="level2">
+<h2 class="anchored" data-anchor-id="plot-distribution-of-our-plant">plot distribution of our plant</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>thailand <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"world"</span>, <span class="st">"thailand"</span>)</span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">ggplot</span>(thailand, <span class="fu">aes</span>(long, lat, <span class="at">group =</span> group)) <span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">geom_polygon</span>(<span class="at">fill =</span> <span class="st">"brown"</span>) <span class="sc">+</span></span>
-<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">coord_quickmap</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>maerua <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"maerua_coord.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 33 Columns: 3
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): fullCountry
+dbl (2): lon, lat
 
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<img data-src="RBiodiversityPresentation_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
-<section id="plot-distribution-of-our-plant" class="slide level2">
-<h2>plot distribution of our plant</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>maerua <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"maerua_coord.csv"</span>)</span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(long, lat, <span class="at">group =</span> group), <span class="at">fill =</span> <span class="st">"#B0C59D"</span>, <span class="at">data =</span> thailand) <span class="sc">+</span></span>
-<span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(lon, lat), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">data =</span> maerua) <span class="sc">+</span></span>
-<span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">coord_quickmap</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(long, lat, <span class="at">group =</span> group), <span class="at">fill =</span> <span class="st">"#B0C59D"</span>, <span class="at">data =</span> thailand) <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(lon, lat), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">data =</span> maerua) <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_quickmap</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="RBiodiversityPresentation_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
-<img data-src="RBiodiversityPresentation_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section></section>
-<section>
-<section id="diversity-community-analysis" class="title-slide slide level1 center">
+</div>
+</section>
+</section>
+<section id="diversity-community-analysis" class="level1">
 <h1>diversity / community analysis</h1>
-
-</section>
-<section id="work-with-community-data" class="slide level2">
-<h2>work with community data</h2>
+<section id="work-with-community-data" class="level2">
+<h2 class="anchored" data-anchor-id="work-with-community-data">work with community data</h2>
 <div class="cell">
-
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: permute</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lattice</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 methods overwritten by 'vegan':
+  method      from
+  plot.rda    klaR
+  predict.rda klaR
+  print.rda   klaR</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>This is vegan 2.6-4</code></pre>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>dune</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>dune</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Achimill Agrostol Airaprae Alopgeni Anthodor Bellpere Bromhord Chenalbu
 1         1        0        0        0        0        0        0        0
@@ -796,25 +600,29 @@ attr(,"class")
 </div>
 </div>
 </section>
-<section id="visualize-community-data" class="slide level2">
-<h2>visualize community data</h2>
+<section id="visualize-community-data" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-community-data">visualize community data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">heatmap</span>(<span class="fu">as.matrix</span>(dune))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmap</span>(<span class="fu">as.matrix</span>(dune))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="RBiodiversityPresentation_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
-<img data-src="RBiodiversityPresentation_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
-<section id="have-we-got-all-the-species-yet" class="slide level2">
-<h2>have we got all the species yet?</h2>
+</div>
+</section>
+<section id="have-we-got-all-the-species-yet" class="level2">
+<h2 class="anchored" data-anchor-id="have-we-got-all-the-species-yet">have we got all the species yet?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">plot</span>(<span class="fu">specaccum</span>(dune))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">specaccum</span>(dune))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="RBiodiversityPresentation_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
-<img data-src="RBiodiversityPresentation_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
-<section id="calculate-diversity-of-each-plot" class="slide level2">
-<h2>calculate diversity of each plot</h2>
+</div>
+</section>
+<section id="calculate-diversity-of-each-plot" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-diversity-of-each-plot">calculate diversity of each plot</h2>
 <p>Species Number</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">specnumber</span>(dune)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">specnumber</span>(dune)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 
  5 10 10 13 14 11 13 12 13 12  9  9 10  7  8  8  7  9  9  8 </code></pre>
@@ -822,7 +630,7 @@ attr(,"class")
 </div>
 <p>Shannon’s Index</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">diversity</span>(dune, <span class="at">index =</span> <span class="st">"shannon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diversity</span>(dune, <span class="at">index =</span> <span class="st">"shannon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3        4        5        6        7        8 
 1.440482 2.252516 2.193749 2.426779 2.544421 2.345946 2.471733 2.434898 
@@ -833,399 +641,156 @@ attr(,"class")
 </div>
 </div>
 </section>
-<section id="community-analysis-with-pca" class="slide level2">
-<h2>community analysis with PCA</h2>
+<section id="community-analysis-with-pca" class="level2">
+<h2 class="anchored" data-anchor-id="community-analysis-with-pca">community analysis with PCA</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">library</span>(ggfortify)</span>
-<span id="cb34-2"><a href="#cb34-2"></a>dune_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(dune)</span>
-<span id="cb34-3"><a href="#cb34-3"></a><span class="fu">autoplot</span>(dune_pca, <span class="at">colour =</span> <span class="st">"Management"</span>, <span class="at">data =</span> dune.env, <span class="at">frame =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>dune_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(dune)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(dune_pca, <span class="at">colour =</span> <span class="st">"Management"</span>, <span class="at">data =</span> dune.env, <span class="at">frame =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="RBiodiversityPresentation_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
-<img data-src="RBiodiversityPresentation_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"><div class="footer footer-default">
-
 </div>
-</section></section>
-    </div>
-  </div>
+</section>
+</section>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="RBiodiversityPresentation_files/libs/revealjs/dist/reveal.js"></script>
-  <!-- reveal.js plugins -->
-  <script src="RBiodiversityPresentation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="RBiodiversityPresentation_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="RBiodiversityPresentation_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="RBiodiversityPresentation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="RBiodiversityPresentation_files/libs/revealjs/plugin/quarto-support/support.js"></script>
-  
-
-  <script src="RBiodiversityPresentation_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="RBiodiversityPresentation_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="RBiodiversityPresentation_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="RBiodiversityPresentation_files/libs/revealjs/plugin/math/math.js"></script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
-
-  <script>
-
-      // Full list of configuration options available at:
-      // https://revealjs.com/config/
-      Reveal.initialize({
-'controlsAuto': true,
-'previewLinksAuto': false,
-'smaller': false,
-'pdfSeparateFragments': false,
-'autoAnimateEasing': "ease",
-'autoAnimateDuration': 1,
-'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'smaller': false,
- 
-        // Display controls in the bottom right corner
-        controls: false,
-
-        // Help the user learn the controls by providing hints, for example by
-        // bouncing the down arrow when they first encounter a vertical slide
-        controlsTutorial: false,
-
-        // Determines where controls appear, "edges" or "bottom-right"
-        controlsLayout: 'edges',
-
-        // Visibility rule for backwards navigation arrows; "faded", "hidden"
-        // or "visible"
-        controlsBackArrows: 'faded',
-
-        // Display a presentation progress bar
-        progress: true,
-
-        // Display the page number of the current slide
-        slideNumber: false,
-
-        // 'all', 'print', or 'speaker'
-        showSlideNumber: 'all',
-
-        // Add the current slide number to the URL hash so that reloading the
-        // page/copying the URL will return you to the same slide
-        hash: true,
-
-        // Start with 1 for the hash rather than 0
-        hashOneBasedIndex: false,
-
-        // Flags if we should monitor the hash and change slides accordingly
-        respondToHashChanges: true,
-
-        // Push each slide change to the browser history
-        history: true,
-
-        // Enable keyboard shortcuts for navigation
-        keyboard: true,
-
-        // Enable the slide overview mode
-        overview: true,
-
-        // Disables the default reveal.js slide layout (scaling and centering)
-        // so that you can use custom CSS layout
-        disableLayout: false,
-
-        // Vertical centering of slides
-        center: false,
-
-        // Enables touch navigation on devices with touch input
-        touch: true,
-
-        // Loop the presentation
-        loop: false,
-
-        // Change the presentation direction to be RTL
-        rtl: false,
-
-        // see https://revealjs.com/vertical-slides/#navigation-mode
-        navigationMode: 'linear',
-
-        // Randomizes the order of slides each time the presentation loads
-        shuffle: false,
-
-        // Turns fragments on and off globally
-        fragments: true,
-
-        // Flags whether to include the current fragment in the URL,
-        // so that reloading brings you to the same fragment position
-        fragmentInURL: false,
-
-        // Flags if the presentation is running in an embedded mode,
-        // i.e. contained within a limited portion of the screen
-        embedded: false,
-
-        // Flags if we should show a help overlay when the questionmark
-        // key is pressed
-        help: true,
-
-        // Flags if it should be possible to pause the presentation (blackout)
-        pause: true,
-
-        // Flags if speaker notes should be visible to all viewers
-        showNotes: false,
-
-        // Global override for autoplaying embedded media (null/true/false)
-        autoPlayMedia: null,
-
-        // Global override for preloading lazy-loaded iframes (null/true/false)
-        preloadIframes: null,
-
-        // Number of milliseconds between automatically proceeding to the
-        // next slide, disabled when set to 0, this value can be overwritten
-        // by using a data-autoslide attribute on your slides
-        autoSlide: 0,
-
-        // Stop auto-sliding after user input
-        autoSlideStoppable: true,
-
-        // Use this method for navigation when auto-sliding
-        autoSlideMethod: null,
-
-        // Specify the average time in seconds that you think you will spend
-        // presenting each slide. This is used to show a pacing timer in the
-        // speaker view
-        defaultTiming: null,
-
-        // Enable slide navigation via mouse wheel
-        mouseWheel: false,
-
-        // The display mode that will be used to show slides
-        display: 'block',
-
-        // Hide cursor if inactive
-        hideInactiveCursor: true,
-
-        // Time before the cursor is hidden (in ms)
-        hideCursorTime: 5000,
-
-        // Opens links in an iframe preview overlay
-        previewLinks: false,
-
-        // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
-
-        // Transition speed (default/fast/slow)
-        transitionSpeed: 'default',
-
-        // Transition style for full page slide backgrounds
-        // (none/fade/slide/convex/concave/zoom)
-        backgroundTransition: 'none',
-
-        // Number of slides away from the current that are visible
-        viewDistance: 3,
-
-        // Number of slides away from the current that are visible on mobile
-        // devices. It is advisable to set this to a lower number than
-        // viewDistance in order to save resources.
-        mobileViewDistance: 2,
-
-        // The "normal" size of the presentation, aspect ratio will be preserved
-        // when the presentation is scaled to fit different resolutions. Can be
-        // specified using percentage units.
-        width: 1050,
-
-        height: 700,
-
-        // Factor of the display size that should remain empty around the content
-        margin: 0.1,
-
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
-        // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
-
-          RevealMath,
-          RevealNotes,
-          RevealSearch,
-          RevealZoom
-        ]
-      });
-    </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
-    <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
       }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        target: function(trigger) {
-          return trigger.previousElementSibling;
-        }
-      });
-      clipboard.on('success', function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      });
-      function tippyHover(el, contentFn) {
-        const config = {
-          allowHTML: true,
-          content: contentFn,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'quarto-reveal',
-          placement: 'bottom-start'
-        };
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          return note.innerHTML;
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
-        }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
-          });
-        }
-      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
     });
-    </script>
-    
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
 
 </body></html>
